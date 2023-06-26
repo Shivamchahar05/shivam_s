@@ -1,0 +1,44 @@
+<div class="ic">{{cartlength}}</div>
+<div class="icon">
+    <i class="fa-solid fa-cart-plus" (click)="toggle()"></i>
+</div>
+<div [hidden]="isListHide" class="main">
+    <div class="yourcart">
+        <h2>Your Cart</h2>
+        <!-- <div *ngFor="let items of cartlistshows let i=index"> -->
+        <i class="fa-solid fa-trash" (click)="deleteall()"></i>
+        <!-- </div> -->
+    </div>
+
+    <div *ngIf="nocart">
+        <h1 style="text-align: center;"> Your Cart is empty</h1>
+    </div>
+    <div [hidden]="isListHide">
+        <div *ngFor="let items of cartlistshows let i=index">
+            <div class="hidden">
+                <div>
+                    <img [src]="items.images[0]">
+                    <p>Price/- {{items.count}}*{{items.price}}</p>
+                </div>
+                <div>
+                    <h1>{{items.title}}</h1>
+                    <div class="action">
+                        <p>Quantity-</p>
+                        <mat-icon class="mat-18" (click)="actionbuttondec(i,-1)">remove</mat-icon>
+                        <div class="countData">{{items.count}}</div>
+                        <mat-icon class="mat-18" (click)="actionbuttondec(i,1)">add</mat-icon>
+                    </div>
+                </div>
+                <div>
+                    <mat-icon class="mat-20" (click)="delete(i)">delete</mat-icon>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="btn" *ngIf="procced">
+            <button (click)="proceed()">
+                Proceed to checkout
+            </button>
+        </div>
+    </div>
+</div>

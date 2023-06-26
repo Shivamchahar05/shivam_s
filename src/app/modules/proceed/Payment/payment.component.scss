@@ -1,0 +1,62 @@
+body{
+    background-image: url("/assets/images.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+    font-size: 20px;
+    color: white;
+    .main{
+        ::ng-deep{
+        
+        .mat-form-field-appearance-outline .mat-form-field-outline {
+            color: white;
+        }
+            mat-form-field{
+                margin-left: 20px;
+                width: 400px;
+            }
+        }
+        .cvv{
+            mat-form-field{
+                margin-left: 73px;
+                width: 400px;
+            }
+        }
+        .inputData{
+            mat-form-field{
+                // margin-left: 100px;
+                width: 225px;
+            }
+            .year{
+                margin-left: 40px;
+            }
+        }
+    h1{
+        text-align: center;
+        font-weight: 600;
+    }
+    .upi{
+        margin-left: 30px;
+    }
+    .gpay{
+        margin-top: 20px;
+    }
+}
+    margin-top: 30px;
+    margin-left:30%;
+    margin-right: 30%;
+    padding: 30px;
+    box-shadow: 2px 2px 5px 5px rgb(171, 232, 243);
+    .btn{
+        display: flex;
+        justify-content: space-between;
+        button{
+            height: 40px;
+            width: 150px;
+            margin-top: 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+<div class="section">
+    <div class="yourcart">
+        <h2>Your Cart</h2> 
+     </div>
+    <div *ngFor="let items of cartlistshows let i=index">
+        <div class="hidden">
+            <div class="details">
+                <div>
+                <img [src]="items.images[0]">
+                <!-- <mat-icon class="mat-20">delete</mat-icon> -->
+                </div>
+                <div class="tittle">
+                    <h1>{{items.title}}</h1>
+                    <div class="action">
+                        <p>Quantity-</p>
+                        <mat-icon class="mat-18" (click)="actionbuttondec(i,-1)">remove</mat-icon>
+                        <div class="countData">{{items.count}}</div>
+                        <mat-icon class="mat-18" (click)="actionbuttondec(i,1)">add</mat-icon>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="price">
+                <!-- <mat-icon class="mat-20">delete</mat-icon> -->
+                <p>Price/- {{items.count}}*{{items.price}}</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <hr>
+    <div class="total">
+        <p>Total Amount-</p>
+        <p>${{totalPrice}}/-</p>
+    </div>
+</div>

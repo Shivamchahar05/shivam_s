@@ -1,0 +1,29 @@
+<div class="add-btn"></div>
+<section>
+    <div class="container">
+        <div *ngFor="let items of previewImg let i=index">
+            <div class="card" [id]="i">
+                <div class="section1">
+                    <div>
+                        <div class="price">
+                            <h1>{{items.title}} </h1>
+                            <h1>Price- ${{items.price}}/-</h1>
+                        </div>
+                        <div class="pics">
+                            <img [src]="items.images[0]">
+                        </div>
+                    </div>
+                    <p>{{items.description}}</p>
+                </div>
+                <div class="btn" *ngIf="!items.cartshow">
+                    <button (click)="addcart(i,addtocartbutton)" #addtocartbutton>Add to Cart</button>
+                </div>
+                <div class="action" *ngIf="items.cartshow">
+                    <mat-icon class="mat-18" (click)="actionbuttondec(i,-1)">remove</mat-icon>
+                    <div class="countData">{{items.count}}</div>
+                    <mat-icon class="mat-18" (click)="actionbuttondec(i,1)">add</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

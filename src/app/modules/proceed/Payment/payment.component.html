@@ -1,0 +1,110 @@
+<body>
+    <div class="main">
+        <h1>Payment</h1>
+        <form [formGroup]="paymentForm">
+            <div class="option">
+                <h2>Payment Methods:</h2>
+                <mat-radio-group aria-label="Select an option" formControlName="paymentOption">
+                    <mat-radio-button value="1">Credit/Debit Card</mat-radio-button>
+                    <mat-radio-button value="2" class="upi">UPI Payment</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="card" *ngIf="paymentForm.controls.paymentOption.value==1">
+                <div class="field">
+                    <mat-label>Enter your Card Number.</mat-label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="xxxx-xxxx-xxxx-xxxx-xxxx" formControlName="cardNumber" required
+                            (keypress)="keyPressNumbers($event)" maxlength="16">
+                        <mat-error *ngIf="paymentForm.controls.cardNumber.invalid">Please enter the card number.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <mat-label>Enter your Card Date</mat-label>
+                        <div class="inputData">
+                            <mat-label>Month:</mat-label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Month</mat-label>
+                                <mat-select formControlName="month">
+                                    <mat-option *ngFor="let month of months" value="month">{{month}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <span class="year">
+                                <mat-label>Year:</mat-label>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Year</mat-label>
+                                    <mat-select formControlName="year">
+                                        <mat-option *ngFor="let year of years" value="year">{{year}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cvv">
+                        <mat-label>Enter CVV Number.</mat-label>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="xxxx" formControlName="cvv" required (keypress)="keyPressNumbers($event)" maxlength="3">
+                            <!-- <mat-hint align="end">{{paymentForm.controls.cvv.value?.length || 0}}/3</mat-hint> -->
+                            <mat-error *ngIf="paymentForm.controls.cvv.invalid">Please enter the CVV number.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="field">
+                    <mat-label>Enter Card Holder Name.</mat-label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="xyz" formControlName="cardHolderName" required>
+                        <mat-error *ngIf="paymentForm.controls.cardHolderName.invalid">Please enter the card holder name.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="upi" *ngIf="paymentForm.controls.paymentOption.value==2">
+                <div class="field">
+                    <mat-label>Enter Your UPI ID.</mat-label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="*************" formControlName="upiId" required>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+        <div class="gpay">
+            <google-pay-button environment="TEST" buttonType="buy" buttonColor="white" [paymentRequest]="{
+    apiVersion: 2,
+    apiVersionMinor: 0,
+    allowedPaymentMethods: [
+      {
+        type: 'CARD',
+        parameters: {
+          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+          allowedCardNetworks: ['AMEX', 'VISA', 'MASTERCARD']
+        },
+        tokenizationSpecification: {
+          type: 'PAYMENT_GATEWAY',
+          parameters: {
+            gateway: 'example',
+            gatewayMerchantId: 'exampleGatewayMerchantId'
+          }
+        }
+      }
+    ],
+    merchantInfo: {
+      merchantId: '12345678901234567890',
+      merchantName: 'Demo Merchant'
+    },
+    transactionInfo: {
+      totalPriceStatus: 'FINAL',
+      totalPriceLabel: 'Total',
+      totalPrice: '100.00',
+      currencyCode: 'USD',
+      countryCode: 'US'
+    }
+  }" (loadpaymentdata)="onLoadPaymentData($event)"></google-pay-button>
+        </div>
+        <div class="btn">
+            <button mat-raised-button type="button" matStepperPrevious>Back</button>
+            <button mat-raised-button type="submit" matStepperNext (click)="openDialog()">Pay-${{gpay}}/-</button>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,103 @@
+.main {
+    background-color: #254686;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 20px;
+    width: 100%;
+
+    .Categories {
+        margin-top: 40px;
+        margin-left: 50px;
+        display: flex;
+
+        // display: grid;
+        // grid-template-columns: 40% 30% 30%;
+        // border: 1px solid;
+        h4 {
+            font-size: 20px;
+        }
+        button {
+            margin-left: 20px;
+            width: 150px;
+            height: 30px;
+            font-size: 20px;
+        }
+    }
+    p {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        padding-top: 20px;
+    }
+}
+// .mat-form-field-wrapper {
+//     margin: 0.25em 10px ;
+// }
+::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-flex {
+        margin: 0.25em 10px;
+        color: white;
+        // margin-left: 100px;
+    }
+}
+::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: white;
+        box-shadow: 3px 1px 7px 1px lightblue;
+    }
+    .mat-select-value {
+        color: white;
+    }
+}
+
+.btn {
+    margin-top: 50px;
+}
+// .sub_cat123{
+//     display: flex;
+//     justify-content: space-between;
+// }
+.sub_cat {
+    display: flex;
+    justify-content: space-between;
+    // border: 1px solid;
+}
+.int{
+    input{
+        width: 200px;
+        height: 50px;
+        border-radius: 5px;
+        margin-left: 20px;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+}
+.btndistrict{
+    margin-top: 20px;
+}
+.delete{
+    display: flex;
+    // margin-left: 50px;
+    i{
+        margin-left: 20px;
+        font-size: 20px;
+    }
+}
+.dis{
+    display: flex;
+    margin-left: 10px;
+}
+.section{
+    display: flex;
+    justify-content: space-between;
+    // margin-left: 10px;
+}
+.adddis{
+    margin-left: 20px;
+}
+// .distict{
+//     display: flex;
+//     margin-left: 20px;
+// }

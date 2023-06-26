@@ -1,0 +1,96 @@
+<!-- <p>newtab works!</p> -->
+<div class="main">
+    <p>Address</p>
+    <div class="Categories">
+        <form [formGroup]="countryform">
+            <div>
+                <h4>Country</h4>
+                <mat-form-field appearance="outline">
+                    <mat-select (selectionChange)="onCountryChange($event.value)" [formControl]="countryControl">
+                        <mat-option *ngFor="let item of countrydata" [value]="item">{{item.country}}</mat-option>
+                    </mat-select>
+                    <!-- <mat-label>Select option</mat-label> -->
+                </mat-form-field>
+            </div>
+                <div formArrayName="addstates" class="sub_cat">
+                    <div *ngFor="let addstates of addstates()?.controls; let addstateIndex=index">
+                        <h4>State</h4>
+                        <div [formGroupName]="addstateIndex">
+                            <div class="delete">
+                                <mat-form-field appearance="outline">
+                                    <mat-select (selectionChange)="onstateChange($event,addstateIndex)"
+                                        formControlName="states">
+                                        <mat-option *ngFor="let item1 of state" [value]="item1.state_name">
+                                            {{item1.state_name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div>
+                                    <i class="fa-solid fa-trash" (click)="deletestate(addstateIndex)"></i>
+                                </div>
+                            </div>
+
+                            <div class="sub_cat123">
+
+                                <div class="section">
+
+                                    <div formArrayName="districts" class="dis">
+
+                                        <div
+                                            *ngFor="let distric of districtSkills(addstateIndex).controls; let skillIndex=index">
+                                            <div [formGroupName]="skillIndex">
+                                                <h4>District</h4>
+                                                <div>
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select formControlName="distric">
+                                                            <mat-option
+                                                                *ngFor="let item2 of countrystate.get(addstateIndex)"
+                                                                [value]="item2">
+                                                                {{item2.district_name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <!-- <mat-label>Select option</mat-label> -->
+                                                    </mat-form-field>
+                                                </div>
+                                                <!-- add city -->
+                                                <div class="sub_cat12">
+                                                    <h4>City</h4>
+                                                    <div formArrayName="city">
+                                                        <div
+                                                            *ngFor="let citys of cityadd(addstateIndex,skillIndex)?.controls; let cityIndex=index">
+                                                            <div [formGroupName]="cityIndex">
+                                                                <div class="int">
+                                                                    <!-- <mat-form-field appearance="outline"> -->
+                                                                    <!-- <mat-label>Input</mat-label> -->
+                                                                    <input type="text" placeholder="city"
+                                                                        formControlName="citys">
+                                                                    <!-- </mat-form-field> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button (click)="addcitynew(addstateIndex,skillIndex)">Add
+                                                        city</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button (click)="adddistrictnew(addstateIndex)" class="adddis" >Add
+                                            district</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn" (click)="addstatesnew()">Add state</button>
+                    </div>
+                </div>
+
+        </form>
+    </div>
+</div>
+<div *ngIf="submit">
+    <h1>{{count.value | json}}</h1>
+</div>

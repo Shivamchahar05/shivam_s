@@ -1,0 +1,16 @@
+<body class="dialog">
+  <div class="header">
+    <mat-icon class="mat-18">delete</mat-icon>
+    <h1 mat-dialog-title>{{data.title}}</h1>
+  </div>
+  <div class="desc" mat-dialog-content>
+    <p class="dialog-message">{{data.description}}</p>
+  </div>
+  <div *ngIf="data.rejectButton" class="btn" mat-dialog-actions>
+    <button mat-button type="button" (click)="close()">{{data.rejectButton}}</button>
+    <button mat-button type="button" (click)="save()" class="accept">{{data.acceptButton}}</button>
+  </div>
+  <div *ngIf="!data.rejectButton" class="cnfBtn" mat-dialog-actions>
+    <button mat-button (click)="save()">{{data.acceptButton}}</button>
+  </div>
+</body>

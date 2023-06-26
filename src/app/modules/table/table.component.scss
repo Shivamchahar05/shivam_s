@@ -1,0 +1,41 @@
+section {
+  table {
+    width: 100%;
+    margin-top: 1%;
+    th {
+      text-align: center;
+      background-color: #ffd3b4;
+      color: white;
+      font-size: 18px;
+    }
+    tr {
+      text-align: center;
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-bottom: 10px;
+        mat-icon {
+          background-color: #8dcb30;
+          border-radius: 50%;
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
+        }
+      }
+      .removeIcon {
+        color: red;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        cursor: pointer;
+      }
+    }
+    td .item-class {
+      display: flex;
+      flex-flow: column;
+    }
+  }
+}

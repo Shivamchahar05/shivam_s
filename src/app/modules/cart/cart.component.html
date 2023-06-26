@@ -1,0 +1,111 @@
+<div class="container">
+</div>
+<div class="header">
+  <div class="header_under">
+    <h1>MY SHOPPING<br>CART</h1>
+    <div>
+    <input type="search" placeholder="Search items" [(ngModel)]="searchCategories"  (keyup)="applyFilter($event)">
+    </div>
+    <div class="sign_in">
+      <h2>Sign In</h2>
+      <!-- <div class="count"></div> -->
+      <i class="fa-solid fa-user"></i>
+      <div class="dropdown">
+        <app-cartdroplist></app-cartdroplist>
+      </div>
+    </div>
+  </div>
+    <div>
+      <div class="Categories">
+        <div>
+          <h4>Categories</h4>
+          <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="onCategoryChange()" [formControl]="categoryControl">
+              <mat-option *ngFor="let item of categoryData" [value]="item">{{item.category}}</mat-option>
+            </mat-select>
+            <!-- <mat-label>Select option</mat-label> -->
+          </mat-form-field>
+        </div>
+        <div class="sub_cat">
+          <h4> Sub Categories</h4>
+          <mat-form-field appearance="outline">
+            <mat-select [formControl]="subCategoryControl">
+              <mat-option *ngFor="let item of subCatData" [value]="item">{{item.subCatName}}</mat-option>
+            </mat-select>
+            <!-- <mat-label>Select option</mat-label> -->
+          </mat-form-field>
+        </div>
+        <div class="home">
+          <i class="fa-solid fa-house-user" (click)="nextcart()"></i>
+        </div>
+
+      </div>
+    </div>
+    <div class="add" *ngIf="cart">
+      <button type="button" (click)="addData()">Add</button>
+      <button type="button" (click)="tab()">Show tab</button>
+    </div>
+</div>
+<div *ngIf="cart" class="main">
+  <div>
+    <div class="buttons">
+      <button>Shoes</button>
+      <button>Clothes</button>
+      <button>Mobile Phones</button>
+      <button>Earphone</button>
+      <button>Speakers</button>
+      <button>Laptops</button>
+    </div>
+  </div>
+  <section class="tbl">
+    <form [formGroup]="productDataForm">
+      <table>
+        <thead>
+          <th *ngFor="let item of columns">
+            <h2>{{item.heading}}</h2>
+          </th>
+        </thead>
+        <tbody formArrayName="productData" *ngFor="let category of productData?.controls; let catIdx=index ">
+          <ng-container [formGroupName]="catIdx">
+            <ng-container>
+              <tr formArrayName="subCategory"
+                *ngFor="let subCat of getSubCategory(catIdx)?.controls; let subCatIdx=index">
+                <ng-container [formGroupName]="subCatIdx">
+                  <td>
+                    <ng-container *ngIf="subCatIdx==0">{{category.get('categoryId')?.value}}</ng-container>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="subCatIdx==0">{{category.get('categoryName')?.value}}</ng-container>
+                  </td>
+                  <td>{{subCat.get('subCategoryName')?.value}}</td>
+                  <td formArrayName="classes" *ngFor="let item of getSubcategoryClasses(subCat); let classIdx=index">
+                    <div class="action">
+                      <mat-icon class="mat-18" (click)="actionButton(catIdx,subCatIdx,classIdx,-1)" >remove</mat-icon>
+                      <div class="countData" [formGroupName]="classIdx">{{item.get('classCount')?.value}}</div>
+                      <mat-icon class="mat-18" (click)="actionButton(catIdx,subCatIdx,classIdx,1)">add</mat-icon>
+                    </div>
+                  </td>
+                  <td>{{subCat.get('classTotal')?.value}}</td>
+                  <td>
+                    <mat-icon class="removeIcon" (click)="openDialog(catIdx,subCatIdx)">delete</mat-icon>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </form>
+    <div class="btn">
+      <button type="button" mat-raised-button (click)="finalSubmit()">Final Submit</button>
+    </div>
+    <section *ngIf="showFinalData" class="saved">
+      <h2>Final Data:</h2>
+      <h3>{{productData.value|json}}</h3>
+    </section>
+  </section>
+</div>
+<!-- next cart -->
+<div *ngIf="newcart">
+   <app-newcart></app-newcart>
+</div>
